@@ -1,6 +1,7 @@
 package cloud.controller;
 
 import cloud.model.boundary.UnitBoundary;
+import cloud.model.boundary.UnitEmployeeBoundary;
 import cloud.service.UnitService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -49,5 +50,38 @@ public class UnitController {
     @DeleteMapping
     public Mono<Void> deleteAllUnits() {
         return unitService.deleteAllUnits();
+    }
+
+    @PutMapping("/{unitId}/users")
+    public Mono<Void> assignUnits(
+            @PathVariable String unitId,
+            @RequestBody @Valid UnitEmployeeBoundary user
+            ) {
+        return unitService.addUserToUnit(unitId, user.getEmail());
+    }
+
+    @GetMapping("/{unitId}/users")
+    public Flux<UnitEmployeeBoundary> getUsersOfUnit(
+            @PathVariable String unitId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return unitService.getUsersOfUnit(unitId, page, size);
+    }
+
+    @GetMapping("/{email}/units")
+    public Flux<UnitBoundary> getUnitsByUserEmail(
+            @PathVariable String email,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return unitService.getUnitsByUserEmail(email, page, size);
+    }
+
+    @DeleteMapping("/{unitId}/users")
+    public Mono<Void> removeAllUsers(
+            @PathVariable String unitId
+    ) {
+        return unitService.removeAllUsersFromUnit(unitId);
     }
 }

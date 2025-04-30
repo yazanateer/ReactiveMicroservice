@@ -3,7 +3,9 @@ package cloud.model.entity;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -17,7 +19,8 @@ public class UnitEntity {
     private String creationDate;
     private String description;
 
-    private Set<String> users = new HashSet<>();
+    //for the bonus questions
+    private List<String> users = new ArrayList<>();
 
     public UnitEntity() {
 
@@ -46,7 +49,7 @@ public class UnitEntity {
         this.description = description;
     }
 
-    public void setUsers(Set<String> users) {
+    public void setUsers(List<String> users) {
         this.users = users;
     }
 
@@ -66,7 +69,7 @@ public class UnitEntity {
         return description;
     }
 
-    public Set<String> getUsers() {
+    public List<String> getUsers() {
         return users;
     }
 
