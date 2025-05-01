@@ -42,13 +42,13 @@ public class UnitServiceImplementation implements UnitService {
 
     @Override
     public Mono<UnitBoundary> getUnitById(String unitId) {
-        return unitCRUD.findByUnitId(unitId)
+        return unitCRUD.findById(unitId)
                 .map(UnitBoundary::new);
     }
 
     @Override
     public Flux<UnitBoundary> getAllUnits(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("unitId").ascending());
         return unitCRUD.findAllBy(pageable)
                 .map(UnitBoundary::new);
 

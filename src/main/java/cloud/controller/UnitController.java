@@ -31,7 +31,7 @@ public class UnitController {
         return unitService.getUnitById(unitId);
     }
 
-    @GetMapping
+    @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<UnitBoundary> getAllUnits(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
@@ -60,7 +60,7 @@ public class UnitController {
         return unitService.addUserToUnit(unitId, user.getEmail());
     }
 
-    @GetMapping("/{unitId}/users")
+    @GetMapping(path = "/{unitId}/users", produces = MediaType.TEXT_EVENT_STREAM_VALUE )
     public Flux<UnitEmployeeBoundary> getUsersOfUnit(
             @PathVariable String unitId,
             @RequestParam(defaultValue = "0") int page,
@@ -69,7 +69,7 @@ public class UnitController {
         return unitService.getUsersOfUnit(unitId, page, size);
     }
 
-    @GetMapping("/{email}/units")
+    @GetMapping(path = "/{email}/units", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<UnitBoundary> getUnitsByUserEmail(
             @PathVariable String email,
             @RequestParam(defaultValue = "0") int page,
