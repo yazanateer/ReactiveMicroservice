@@ -3,10 +3,6 @@ package cloud.model.boundary;
 import cloud.model.entity.UnitEntity;
 import jakarta.validation.constraints.NotBlank;
 
-
-
-//    {"unitId":"1", "name":"Management", "creationDate":"20-04-2025", "description":"Company Management"}
-
 public class UnitBoundary {
 
     private String unitId;
